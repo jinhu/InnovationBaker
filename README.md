@@ -1,6 +1,7 @@
-# Hello Scaloid for gradle
+# InnovationBaker
+androidapp that detect nfc tag and send to BT
 
-This is a template project that can be a starting point of a new [Scaloid](https://github.com/pocorall/scaloid) project.
+
 
 This contains minimum code as possible; therefore easy to run, examine and extend.
 
