@@ -7,8 +7,6 @@ import org.scaloid.common._
  */
 
 class BakerActivity extends SActivity {
-  def nfc = new NfcFacade()
-
   onCreate {
     contentView = new SVerticalLayout {
       //      style {
