@@ -3,7 +3,7 @@ package dev.chimera.innovation
 /**
  * Created by jin on 3/14/15.
  */
-class CoffeeSpec extends UnitSpec {
+class CoffeeCupSpec extends UnitSpec {
 
   var mCup = new CoffeeCup()
 
