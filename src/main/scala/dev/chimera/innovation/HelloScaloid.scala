@@ -1,7 +1,7 @@
-package scaloid.example
+package dev.chimera.innovation
 
 import org.scaloid.common._
-import android.graphics.Color
+
 
 class HelloScaloid extends SActivity {
 

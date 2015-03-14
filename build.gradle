@@ -38,9 +38,18 @@ android {
             proguardFile file("proguard-rules.txt")
         }
     }
+    dexOptions {
+        incremental true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
 }
 
 dependencies {
-    compile "org.scala-lang:scala-library:2.11.5"
-	compile "org.scaloid:scaloid_2.11:3.6.1-10+"
+    compile 'org.scala-lang:scala-library:2.11.5'
+    compile 'org.scaloid:scaloid_2.11:3.6.1-10+'
+    androidTestCompile 'org.scalatest:scalatest_2.11:2.2.4'
+    androidTestCompile 'junit:junit:4.11'
 }
