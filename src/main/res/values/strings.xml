@@ -2,4 +2,6 @@
 <resources>
     <string name="red">Red</string>
     <string name="app_name">Innovation Baker</string>
+    <string name="clear_button">Clean</string>
+    <string name="manual_button">Write</string>
 </resources>

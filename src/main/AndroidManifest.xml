@@ -43,9 +43,7 @@
 
     <application
             android:icon="@drawable/beker"
-            android:label="@string/app_name"
-            android:taskAffinity="com.altran.nfc.tagwriter"
-            android:theme="@style/Theme.White">
+            android:label="@string/app_name">
 
         <activity android:name="dev.chimera.innovation.BakerActivity"
                   android:label="@string/app_name">
@@ -53,8 +51,14 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="text/plain"/>
+            </intent-filter>
+
         </activity>
-        <activity
+        <!--activity
                 android:name="com.altran.nfc.tagwriter.activities.WelcomeScreen"
                 android:label="@string/app_name"
                 android:launchMode="singleTop">
@@ -76,13 +80,7 @@
                 android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="com.altran.nfc.tagwriter.WRITE_NDEF"/>
-                <!--
-                     When using this action, present your data in
-                     an extra named "android.nfc.extra.NDEF_MESSAGES".
-                     This should contain a Parcelable[] with NdefMessage inside.
-                     An alternative is to put a Uri to an NdefMessage byte array
-                     in the Intent data. The same goes for com.android.intent.SEND
-                -->
+
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
             <intent-filter>
@@ -92,7 +90,6 @@
 
                 <data android:mimeType="vnd.android.cursor.item/ndef_msg_mime"/>
             </intent-filter>
-            <!-- Intercept links from the browser, for example -->
             <intent-filter>
                 <action android:name="android.intent.action.SEND"/>
 
@@ -139,9 +136,7 @@
                 <data android:mimeType="vnd.android.cursor.item/ndef_msg"/>
             </intent-filter>
         </activity-alias>
-
-        <!-- this activity is needed for importing data from mail -->
-        <activity
+       <activity
                 android:name="com.altran.nfc.tagwriter.activities.ExternalHistoryActivity"
                 android:finishOnTaskLaunch="true"
                 android:launchMode="singleTop">
@@ -181,12 +176,7 @@
                 android:name="com.altran.nfc.tagwriter.activities.ConfirmNoNfcActivity"
                 android:finishOnTaskLaunch="true"
                 android:launchMode="singleTop"/>
-        <!--
-        <activity
-            android:finishOnTaskLaunch="true"
-            android:launchMode="singleTop"
-            android:name=".activities.UpgradesActivity" />
-        -->
+
         <activity
                 android:name="com.altran.nfc.tagwriter.activities.DashboardActivity"
                 android:configChanges="locale"
@@ -201,7 +191,6 @@
                 android:enabled="false"
                 android:targetActivity="com.altran.nfc.tagwriter.activities.DashboardActivity">
 
-            <!-- Mail intent filter -->
             <intent-filter>
                 <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
 
@@ -209,7 +198,6 @@
 
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
-            <!-- URL intent filter -->
             <intent-filter android:priority="-101">
                 <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
 
@@ -228,8 +216,7 @@
 
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
-            <!-- Added 21-12-12 -->
-            <intent-filter>
+              <intent-filter>
                 <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
 
                 <data android:scheme="sms"/>
@@ -257,12 +244,10 @@
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
             </intent-filter>
-            <!-- Stop 21-12-12 -->
-
             <meta-data
                     android:name="android.nfc.action.TECH_DISCOVERED"
                     android:resource="@xml/filter_nfc"/>
-        </activity-alias>
+        </activity>
 
         <activity
                 android:name="com.altran.nfc.tagwriter.activities.ToolsActivity"
@@ -286,126 +271,7 @@
         <activity
                 android:name="com.altran.nfc.tagwriter.activities.ChooseContentTypeActivityDynamic"
                 android:finishOnTaskLaunch="false"
-                android:launchMode="singleTop"/>
-        <!--
-              Important: The following 3 activities are accessible from other apps by launching an
-              intent. To make sure NFC intents are routed correctly to these activities when they
-              have been launched by another app when another instance of TagWriter is also running,
-              we have to set taskAffinity to ""
-        -->
-        <activity
-                android:name="com.altran.nfc.tagwriter.activities.WriteParametersActivity"
-                android:finishOnTaskLaunch="false"
-                android:launchMode="singleTop"
-                android:taskAffinity=""/>
-        <activity
-                android:name="com.altran.nfc.tagwriter.activities.ConfirmOldContentActivity"
-                android:finishOnTaskLaunch="false"
-                android:launchMode="singleTop"
-                android:taskAffinity=""/>
-        <activity
-                android:name="com.altran.nfc.tagwriter.activities.ChooseVersionActivity"
-                android:finishOnTaskLaunch="false"
-                android:launchMode="singleTop"
-                android:taskAffinity="">
-            <intent-filter>
-                <action android:name="com.activity.ChooseVersionActivity"/>
-
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
-        </activity>
-        <activity
-                android:name="com.altran.nfc.tagwriter.activities.WriterActivity"
-                android:finishOnTaskLaunch="true"
-                android:launchMode="singleTop"
-                android:taskAffinity="">
-            <intent-filter>
-                <action android:name="com.altran.nfc.tagwriter.WRITE"/>
-
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
-            <intent-filter>
-                <action android:name="com.altran.nfc.tagwriter.ERASE"/>
-
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
-            <intent-filter>
-                <action android:name="com.altran.nfc.tagwriter.PROTECT"/>
-
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
-            <intent-filter>
-                <action android:name="com.altran.nfc.tagwriter.INSPECT"/>
-
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
-        </activity>
-        <activity
-                android:name="com.altran.nfc.tagwriter.activities.createcontent.EditTagActivity"
-                android:finishOnTaskLaunch="true"
-                android:launchMode="singleTop"
-                android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="com.altran.nfc.tagwriter.CREATE"/>
-
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
-        </activity>
-        <activity
-                android:name="com.altran.nfc.tagwriter.activities.createcontent.BookmarkListActivity"
-                android:finishOnTaskLaunch="true"
-                android:launchMode="singleTop"
-                android:windowSoftInputMode="adjustPan">
-            <intent-filter>
-                <action android:name="com.altran.nfc.bookmarks.PICK"/>
-
-                <category android:name="android.intent.category.DEFAULT"/>
-            </intent-filter>
-        </activity>
-        <activity
-                android:name="com.altran.nfc.tagwriter.activities.createcontent.BluetoothListActivity"
-                android:finishOnTaskLaunch="true"
-                android:launchMode="singleTop"
-                android:windowSoftInputMode="adjustPan">
-        </activity>
-        <activity
-                android:name="com.altran.nfc.tagwriter.activities.QrCodeAskOptionsActivity"
-                android:finishOnTaskLaunch="false"
-                android:launchMode="singleTop">
-        </activity>
-
-        <service android:name="com.altran.nfc.tagwriter.service.TagHistoryService">
-        </service>
-        <service
-                android:name="com.altran.nfc.tagwriter.service.SmsService"
-                android:permission="android.permission.SEND_SMS">
-        </service>
-
-        <provider
-                android:name="com.altran.nfc.tagwriter.providers.TagHistoryProvider"
-                android:authorities="com.altran.nfc.tagwriter.providers.TagHistoryProvider"
-                android:multiprocess="false"
-                android:syncable="false"/>
-
-        <service android:name="com.altran.nfc.tagwriter.prch.MarketService"/>
-
-        <receiver android:name="com.altran.nfc.tagwriter.prch.MarketReceiver">
-            <intent-filter>
-                <action android:name="com.android.vending.billing.IN_APP_NOTIFY"/>
-                <action android:name="com.android.vending.billing.RESPONSE_CODE"/>
-                <action android:name="com.android.vending.billing.PURCHASE_STATE_CHANGED"/>
-            </intent-filter>
-        </receiver>
-        <activity
-                android:name="com.altran.nfc.tagwriter.activities.HistoryActivity"
-                android:finishOnTaskLaunch="false"
-                android:launchMode="singleTop">
-        </activity>
-        <activity
-                android:name="com.altran.nfc.tagwriter.activities.BtPairConnectActivity"
-                android:finishOnTaskLaunch="false"
-                android:launchMode="singleTop">
-        </activity>
+                android:launchMode="singleTop"/-->
     </application>
 
 </manifest>

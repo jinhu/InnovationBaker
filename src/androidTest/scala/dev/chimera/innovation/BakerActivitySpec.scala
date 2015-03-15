@@ -1,9 +1,11 @@
 package dev.chimera.innovation
 
+import android.content.Context
+
 class BakerActivitySpec extends UnitSpec {
 
   it should "have default value when Uninitialized" in {
-    var activity = new BakerActivity()
+    var activity = new BakerActivity(mock[Context])
     activity should not be (null)
   }
 
