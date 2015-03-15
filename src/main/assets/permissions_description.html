@@ -1,0 +1,34 @@
+<html>
+	<body>
+		<p>Description on the requested  permissions</p>
+		
+		<p>This section contains a detailed description on what the permissions requested are actually used for within the application.<br>
+		We strive to create transparency why such permissions are needed, what they’re used for and to also describe when they’re actually used.<br>
+		No permissions are used to track or monitor the user. The permissions granted are only used in combination with functions of the applications that the user is operating or which the user has configured as part of the automatic actions in combination with the tap to launch features.</p>
+		<ul>
+			<li><b>android.permission.READ_CONTACTS</b><br>
+			The permission android.permission.READ_CONTACTS is needed for the import and export of Contact NFC data sets. The right is only used when the function “Create and write”, “New” and Contact as type is selected and when the function “Store into Contacts” of the context menu in the history is selected.</li>
+			<li><b>android.permission.READ_PROFILE</b><br>
+			The permission android.permission.READ_PROFILE is needed to access the "ME” contact of the Contacts application. The right is only used when the “ME” contact is opened, the function “Share namecard via” is selected and TagWriter is selected.</li>
+			<li><b>android.permission.NFC</b><br>
+			The permission android.permission.NFC is needed to get access to the NFC functionality for reading content from and writing content to NFC-enabled items. The permission is used for any interaction using the NFC hardware.</li>
+			<li><b>android.permission.VIBRATE</b><br>
+			The permission android.permission.VIBRATE is needed to inform users about the detection of an NFC-enabled item and possible related actions as configured via tap to launch. The permission is not used otherwise and the use of the vibration feature can also be disabled within the preferences.</li>
+			<li><b>com.android.browser.permission.READ_HISTORY_BOOKMARKS</b><br>
+			The permission com.android.browser.permission.READ_HISTORY_BOOKMARKS is needed for the import and export of bookmark NFC data sets. The permission is only used when the function “Create and write”, “New” and Bookmark as type is selected and when the function “Store into Bookmarks” of the context menu in the history is selected.</li>
+			<li><b>android.permission.WRITE_EXTERNAL_STORAGE</b><br>
+			The permission android.permission.WRITE_EXTERNAL_STORAGE is needed for the export and import of the NFC data set history and for the file selection when creating a file URI and using the option “Use file location”. The permission is only used for the above listed storage accesses.</li>
+			<li><b>android.permission.BLUETOOTH</b><br>
+			The permission android.permission.BLUETOOTH is needed to create Bluetooth NFC data sets. The permission is only used when the function “Use from this device” is selected as part of “Create and write”, “New” and Bluetooth as type was chosen.</li>
+			<li><b>android.permission.BLUETOOTH_ADMIN</b><br>
+			The permission android.permission.BLUETOOTH_ADMIN is needed to pair and connect to other Bluetooth devices. The permission is used on an explicit user interaction to launch a Bluetooth NFC data set via the context menu. The only other use of the permission is when enabling the according tap to launch feature in the preferences and afterwards scanning a Bluetooth NFC data set.</li>
+			<li><b>android.permission.CALL_PHONE</b><br>
+			The permission android.permission.CALL_PHONE is needed to execute an incoming Telephone NFC data set. The permission is used on an explicit user interaction to launch such an NFC data set via the context menu. The only other use of the permission is when enabling the according tap to launch feature in the preferences and afterwards scanning a Phone NFC data set.</li>
+			<li><b>android.permission.SEND_SMS</b><br>
+			The permission android.permission.SEND_SMS is needed to execute an incoming SMS NFC data set. The permission is only used on an explicit user interaction asking to launch such an NFC data set via the context menu. The only other use of the permission is when enabling the according tap to launch feature in the preferences and afterwards scanning an SMS NFC data set.</li>
+			<li><b>android.permission.ACCESS_FINE_LOCATION</b><br>
+			The permission android.permission.ACCESS_FINE_LOCATION is needed to create geo location NFC data sets. The permission is only used when the function “Use current location” is selected as part of “Create and write”, “New” and Geo Location as type was chosen.
+			The only location information stored is the one explicitly created by the user as NFC data sets and which have possibly be stored on NFC tags or transmitted to other devices and the NFC data sets of this type stored in the history as a result of the creation.</li>
+		</ul>
+	</body>
+</html>

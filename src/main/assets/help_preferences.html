@@ -1,0 +1,80 @@
+<html>
+    <body>
+        <p><a href="permissions_description.html">Permissions description</a></p>
+		
+		<p>Preferences</p>
+    	
+    	<p>Here you can adjust how TagWriter behaves to your preferences.</p>
+    	
+    	<h3>General</h3>
+    	<ul>
+    		<li><b>Lock to portrait</b>: Keep the screen locked to portrait mode. When this option is disabled, the application will adjust to the current orientation of the device.</li>
+    		<li><b>Enable sound</b>: Play sounds when performing an operation on an item.</li>
+    		<li><b>Enable vibration</b>: Make device vibrate when performing an operation on an item.</li>
+    	</ul>
+    	
+    	<h3>Operation</h3>
+    	<ul>
+    		<li><b>Confirm changes</b>: Show an extra screen with the current contents of an NFC item right before writing, erasing, protecting etc. the NFC item. This will allow you to decide whether or not you wish to continue the operation.</li>
+    		<li><b>Enable format</b>: When this option is enabled and an NFC item is presented that has not yet been formatted for use with TagWriter, it is automatically formatted before writing the new information. The unformatted item will not be usable by TagWriter if this option is left off and write operations will fail until you manually format the item (Manual format is only available in the Standard version and up).</li>
+    		<li><b>Protect method</b>: Choose from <i>Soft read-only</i> and <i>Permanent read-only</i>. Soft read only is reversible, permanent read-only is a one-time operation that cannot be reversed.</li>
+    		<li><b>Accept data set from Tags</b>: When this option is enabled, and a user selects an item in the Tags application, TagWriter will be offered as an option to allow writing the content. Enable this if you have some content in the Tags application that you would like to write with TagWriter.</li>
+    	</ul>
+
+		<h3>Operation <b>(Pro only)</b></h3>
+		When writing URI tags (SMS, Phone number, Bookmark) you can use placeholder tags that will be
+		replaced by a value during writing. The placeholder tags include %ctr1%, %ctr2%, %ctr3%, which
+		are counters that are incremented every time they are used. The counter value for each of these
+		counters can be reset here.
+
+		<ul>		
+    		<li><b>Write counter N</b>: Inspect the current value of counter N, and allow to change its value</li>
+    	</ul> 
+		    	
+    	<h3>Event handling</h3>
+    	<ul>
+    		<li><b>Default action</b>: TagWriter can detect when an NFC item is presented in the home screen and start an action. The choices here are <i>View</i>, <i>Store</i> and <i>Ignore</i>. <i>View</i> will lead to the View screen to show the content of the tag. <i>Store</i> will start the 'create' screen, and <i>Ignore</i> will do nothing.</li>
+    	</ul>
+    	
+    	<h3>Event handling <b>(Standard and up only)</b></h3>
+    	<ul>
+    		<li><b>Tap to launch</b>: Enabling this feature allows you to launch TagWriter and perform an action when
+    			an NFC item is detected by your device (even when TagWriter is not running). The action that is performed is content-dependent. For example,
+    			when a Telephone item is detected, the dialer can be opened with the phone number pre-filled.</li>
+    		<li><b>SMS</b>: A Tap to Launch sub-option. Allows for choosing <i>View</i>, <i>Open</i> and <i>Send SMS</i>.
+    			<i>View</i> will open the view screen to view the item content. <i>Open</i> will open the SMS editor with
+    			data pre-filled. <i>Send SMS</i> will directly send off the SMS (this will cost money and therefore the system
+    			will ask for a confirmation when enabling this preference. No extra confirmation is requested before the actual
+    			SMS is sent!)</li>  
+    		<li><b>Call</b>: A Tap to Launch sub-option. Allows for choosing <i>View</i>, <i>Open</i> and <i>Start call</i>.
+    			<i>View</i> will open the view screen to view the item content. <i>Open</i> will open the dialer with
+    			the phone number pre-filled. <i>Start call</i> will directly start dialling (this will cost money and therefore the system
+    			will ask for a confirmation when enabling this preference. No extra confirmation is requested before starting an
+    			actual call!)</li>  
+    		<li><b>E-mail</b>: A Tap to Launch sub-option. Allows for choosing <i>View</i> and <i>Open</i>.
+    			<i>View</i> will open the view screen to view the item content. <i>Open</i> will open the e-mail client with
+    			data pre-filled. Direct sending of e-mails (like for SMS and Call) is not supported at the moment.</li>  
+    		<li><b>Bookmark</b>: A Tap to Launch sub-option. Allows for choosing <i>View</i> and <i>Open link</i>.
+    			<i>View</i> will open the view screen to view the item content. <i>Open link</i> will open the browser with
+    			the URL.</li>  
+    		<li><b>Other</b>: A Tap to Launch sub-option. Allows for choosing <i>View</i> and <i>Launch</i>.
+    			<i>View</i> will open the view screen to view the item content. <i>Launch</i> will open the application that
+    			has registered itself for the given content type (this can launch activities that cost money and therefore
+    			the system will ask for a confirmation when enabling this preference. No extra confirmation is requested
+    			before the actual content launch!</li>  
+    	</ul>
+    	
+    	<h3>History</h3>
+    	<ul>
+    		<li><b>History size</b>: Select the number of items to keep in the TagWriter history. A large number may make the application slower, you can reduce this number then. The default is 50 items</li>
+    	</ul>
+    	
+    	<h3>History <b>(Standard and up only)</b></h3>
+    	<ul>
+    		<li><b>Backup on view</b>: Automatically backup items that are Viewed. They will then appear in the history and allow you to edit them, clone them and write them again. This can only backup TagWriter-compatible items!</li>
+    		<li><b>Backup overwritten</b>: Automatically backup items before they are overwritten. This can only backup TagWriter-compatible items!</li>
+    	</ul>
+	</body>
+</html>
+
+
