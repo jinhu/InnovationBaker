@@ -1,16 +1,19 @@
 package dev.chimera.innovation
 
+import java.io.InputStream
+import java.security.KeyStore
+
+import android.content.Context
 import org.apache.http.conn.ClientConnectionManager
+import org.apache.http.conn.scheme.{PlainSocketFactory, Scheme, SchemeRegistry}
+import org.apache.http.conn.ssl.SSLSocketFactory
 import org.apache.http.impl.client.DefaultHttpClient
+import org.apache.http.impl.conn.SingleClientConnManager
 
-class HttpsConnection extends DefaultHttpClient {
-  private[welkom_bezoekers] final val context: Nothing = null
+class HttpsConnection(aContext: Context, aParamSet: Nothing) extends DefaultHttpClient {
+  var context: Context = aContext
+  var params: Nothing = aParamSet
 
-  def this(context: Nothing, params: Nothing) {
-    this()
-    this.context = context
-    this.setParams(params)
-  }
 
   protected override def createClientConnectionManager: ClientConnectionManager = {
     val registry: SchemeRegistry = new SchemeRegistry

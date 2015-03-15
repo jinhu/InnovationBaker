@@ -1,17 +1,16 @@
 package dev.chimera.innovation
 
-import android.content.Intent
+import android.content.{Context, Intent}
 import android.media.{AudioManager, SoundPool}
 import android.os.StrictMode
 import android.view.WindowManager
-import android.widget.Toast
-import org.scaloid.common.SActivity
+import org.scaloid.common._
 
 /**
  * Created by jin on 3/14/15.
  */
 
-class BakerActivity extends SActivity {
+class BakerActivity extends SActivity with WidgetHelpers {
   final val StreamId: Int = AudioManager.STREAM_NOTIFICATION
   var jsonCommunication: JsonHelper = null
   var internetConnection: InternetHelper = null
@@ -39,9 +38,9 @@ class BakerActivity extends SActivity {
   //      SEditText("Yellow input field fills the space").fill
   //    } padding 20.dip
   //  }
-  var androidNfcDriver: AndroidNfcDriver = ???
+  var androidNfcDriver: AndroidNfcDriver = null
 
-  onCreate() {
+  onCreate {
     //setContentView(R.layout.activity_main)
     getWindow.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
     initNfcSounds(this)
@@ -49,7 +48,7 @@ class BakerActivity extends SActivity {
     jsonCommunication = new JsonHelper
     internetConnection = new InternetHelper(this)
     if (androidNfcDriver.nfcAdapter == null) {
-      toast("This device doesn't support NFC.", Toast.LENGTH_LONG)
+      toast("This device doesn't support NFC.")
     }
     if (!androidNfcDriver.nfcAdapter.isEnabled) {
       toast("NFC is disabled.")
@@ -60,12 +59,19 @@ class BakerActivity extends SActivity {
     val policy: StrictMode.ThreadPolicy = {
       new StrictMode.ThreadPolicy.Builder().permitAll.build
     }
-    StrictMode.setThreadPolicy(policy)
-    internetConnection.checkForWiFi
-    SButton(R.string.red)
-    val clearButton = SButton(R.string.clear_button)
-    // clearButton.onClick( .setTextNameInputField(""))
-    val manualButton = SButton(R.string.manual_button)
+    //StrictMode.setThreadPolicy(policy)
+    //internetConnection.checkForWiFi
+    contentView = new SVerticalLayout {
+
+      this += new SLinearLayout {
+        STextView("Buttons: ")
+        SButton("Red")
+        SButton("Clean")
+        // clearButton.onClick( .setTextNameInputField(""))
+        SButton("Set")
+
+      }.wrap
+    }
     //    manualButton.onClick((v:View) => {
     //          val manualSigningInactivity: Nothing = new Nothing(BakerActivity.this, classOf[ManualSigningIn])
     //          startActivity(manualSigningInactivity  })
@@ -101,31 +107,19 @@ class BakerActivity extends SActivity {
     }
   }
 
-  private def initNfcSounds(context: TraitContext) {
-    //      soundPool = new Nothing(3, StreamId, 0)
-    //      soundPool.setOnLoadCompleteListener( new class null {
-    //        def onLoadComplete(soundPool: Nothing, sampleId: Int, status: Int) {
-    //          Log.d(MainActivity.TAG, "Sound loaded: " + sampleId + ". " + status)
-    //        }
-    //      })
-    //      nfcStartSound = soundPool.load(context, R.raw.start, 1)
-    //      nfcEndSound = soundPool.load(context, R.raw.end, 1)
-    //      nfcErrorSound = soundPool.load(context, R.raw.error, 1)
+  private def initNfcSounds(context: Context) {
+    nfcStartSound = soundPool.load(context, R.raw.start, 1)
+    nfcEndSound = soundPool.load(context, R.raw.end, 1)
+    nfcErrorSound = soundPool.load(context, R.raw.error, 1)
   }
 
   private def playNfcSound(id: Int) {
-    //      try {
-    //        val audioManager: Nothing = getSystemService(Context.AUDIO_SERVICE).asInstanceOf[Nothing]
-    //        val actualVolume: Float = audioManager.getStreamVolume(StreamId).asInstanceOf[Float]
-    //        val maxVolume: Float = audioManager.getStreamMaxVolume(StreamId).asInstanceOf[Float]
-    //        val volume: Float = actualVolume / maxVolume
-    //        soundPool.play(id, volume, volume, 1, 0, 1f)
-    //      }
-    //      catch {
-    //        case e: Exception => {
-    //          Log.d(MainActivity.TAG, "Could not play Nfc sound", e)
-    //        }
-    //      }
+    //            val audioManager: Nothing = getSystemService(Context.AUDIO_SERVICE).asInstanceOf[Nothing]
+    //            val actualVolume: Float = audioManager.getStreamVolume(StreamId).asInstanceOf[Float]
+    //            val maxVolume: Float = audioManager.getStreamMaxVolume(StreamId).asInstanceOf[Float]
+    //            val volume: Float = actualVolume / maxVolume
+    //            soundPool.play(id, volume, volume, 1, 0, 1f)
+    //    play("content://media/internal/audio/media/50")
   }
 
   //    private def getNameInputAsNDEF(emptyOrNot: String): Nothing = {
