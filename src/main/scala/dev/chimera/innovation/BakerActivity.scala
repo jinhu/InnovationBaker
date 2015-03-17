@@ -1,8 +1,7 @@
 package dev.chimera.innovation
 
-import android.content.{Context, Intent}
-import android.media.{AudioManager, SoundPool}
-import android.os.StrictMode
+import android.content.Context
+import android.graphics.Color
 import android.view.WindowManager
 import org.scaloid.common._
 
@@ -11,58 +10,20 @@ import org.scaloid.common._
  */
 
 class BakerActivity extends SActivity with WidgetHelpers {
-  final val StreamId: Int = AudioManager.STREAM_NOTIFICATION
-  var jsonCommunication: JsonHelper = null
-  var internetConnection: InternetHelper = null
-  var nameOfVisitor: String = ""
-  var continueManualSigningIn: Boolean = false
-  var soundPool: SoundPool = null
-  var nfcStartSound: Int = 0
-  var nfcEndSound: Int = 0
-  var nfcErrorSound: Int = 0
 
-  //  onCreate {
-  //    contentView = new SVerticalLayout {
-  //      //      style {
-  //      //        case b: SButton => b.textColor(Color.RED).onClick(toast("Bang!"))
-  //      //        case t: STextView => t textSize 10.dip
-  //      //        case e: SEditText => e.backgroundColor(Color.YELLOW)
-  //      //      }
-  //      STextView("I am 10 dip tall")
-  //      STextView("Me too")
-  //      STextView("I am 15 dip tall") textSize 150.dip // overriding
-  //      this += new SLinearLayout {
-  //        STextView("Button: ")
-  //        SButton(R.string.red)
-  //      }.wrap
-  //      SEditText("Yellow input field fills the space").fill
-  //    } padding 20.dip
-  //  }
-  var androidNfcDriver: AndroidNfcDriver = null
-
+  var deviceSetting = new DeviceSetting()
+  var holder: CupHolder = new CupHolder(deviceSetting)
   onCreate {
-    //setContentView(R.layout.activity_main)
-    getWindow.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-    initNfcSounds(this)
-    androidNfcDriver = new AndroidNfcDriver(this.getApplicationContext, this)
-    jsonCommunication = new JsonHelper
-    internetConnection = new InternetHelper(this)
-    if (androidNfcDriver.nfcAdapter == null) {
-      toast("This device doesn't support NFC.")
-    }
-    if (!androidNfcDriver.nfcAdapter.isEnabled) {
-      toast("NFC is disabled.")
-    }
-    else {
-      toast("NFC is enabled.")
-    }
-    val policy: StrictMode.ThreadPolicy = {
-      new StrictMode.ThreadPolicy.Builder().permitAll.build
-    }
-    //StrictMode.setThreadPolicy(policy)
-    //internetConnection.checkForWiFi
     contentView = new SVerticalLayout {
 
+      style {
+        case b: SButton => b.textColor(Color.RED).onClick(toast("Bang!"))
+        case t: STextView => t textSize 10.dip
+        case e: SEditText => e.backgroundColor(Color.YELLOW)
+      }
+      STextView("I am 10 dip tall")
+      STextView("Me too")
+      STextView("I am 15 dip tall") textSize 150.dip // overriding
       this += new SLinearLayout {
         STextView("Buttons: ")
         SButton("Red")
@@ -71,7 +32,37 @@ class BakerActivity extends SActivity with WidgetHelpers {
         SButton("Set")
 
       }.wrap
-    }
+      SEditText("Yellow input field fills the space").fill
+    } padding 20.dip
+    deviceSetting.context = applicationContext
+    deviceSetting.activity = this
+    new CupHolder(deviceSetting)
+    getWindow.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+
+
+    //  var jsonCommunication: JsonHelper = null
+    //  var internetConnection: InternetHelper = null
+    //  var nameOfVisitor: String = ""
+    //  var continueManualSigningIn: Boolean = false
+    //  var soundPool: SoundPool = null
+    //  var nfcStartSound: Int = 0
+    //  var nfcEndSound: Int = 0
+    //  var nfcErrorSound: Int = 0
+    //  var androidNfcDriver: AndroidNfcDriver = null
+    //    jsonCommunication = new JsonHelper
+    //    internetConnection = new InternetHelper(this)
+    //    if (androidNfcDriver.nfcAdapter == null) {
+    //      toast("This device doesn't support NFC.")
+    //    }else if (!androidNfcDriver.nfcAdapter.isEnabled) {
+    //      toast("NFC is disabled.")
+    //    } else {
+    //      toast("NFC is enabled.")
+    //    }
+    //    val policy: StrictMode.ThreadPolicy = {
+    //      new StrictMode.ThreadPolicy.Builder().permitAll.build
+    //    }
+    //StrictMode.setThreadPolicy(policy)
+    //internetConnection.checkForWiFi
     //    manualButton.onClick((v:View) => {
     //          val manualSigningInactivity: Nothing = new Nothing(BakerActivity.this, classOf[ManualSigningIn])
     //          startActivity(manualSigningInactivity  })
@@ -96,21 +87,22 @@ class BakerActivity extends SActivity with WidgetHelpers {
     //      })
   }
 
-  override protected def onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
-    if (requestCode == 1) {
-      if (resultCode == Constants.RESULT_OK) {
-        if (data.getStringExtra("handmatigaanmelden").equalsIgnoreCase("handmatigaanmelden")) {
-          nameOfVisitor = data.getStringExtra("nameOfPerson")
-          continueManualSigningIn = true
-        }
-      }
-    }
-  }
+  //
+  //  override protected def onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+  //    if (requestCode == 1) {
+  //      if (resultCode == Constants.RESULT_OK) {
+  //        if (data.getStringExtra("handmatigaanmelden").equalsIgnoreCase("handmatigaanmelden")) {
+  //          nameOfVisitor = data.getStringExtra("nameOfPerson")
+  //          continueManualSigningIn = true
+  //        }
+  //      }
+  //    }
+  //  }
 
   private def initNfcSounds(context: Context) {
-    nfcStartSound = soundPool.load(context, R.raw.start, 1)
-    nfcEndSound = soundPool.load(context, R.raw.end, 1)
-    nfcErrorSound = soundPool.load(context, R.raw.error, 1)
+    //nfcStartSound = soundPool.load(context, R.raw.start, 1)
+    //nfcEndSound = soundPool.load(context, R.raw.end, 1)
+    //nfcErrorSound = soundPool.load(context, R.raw.error, 1)
   }
 
   private def playNfcSound(id: Int) {
