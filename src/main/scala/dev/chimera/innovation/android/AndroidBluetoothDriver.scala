@@ -1,4 +1,4 @@
-package android
+package dev.chimera.innovation.android
 
 import android.bluetooth.BluetoothAdapter
 

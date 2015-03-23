@@ -1,8 +1,8 @@
 package dev.chimera.innovation
 
-import android.content.Context
-import android.graphics.Color
-import android.view.WindowManager
+import _root_.android.content.Context
+import _root_.android.graphics.Color
+import _root_.android.view.WindowManager
 import org.scaloid.common._
 
 /**
