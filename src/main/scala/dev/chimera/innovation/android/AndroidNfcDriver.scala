@@ -1,4 +1,4 @@
-package android
+package dev.chimera.innovation.android
 
 import android.app.{Activity, Dialog, PendingIntent}
 import android.content.{Context, Intent, IntentFilter}
