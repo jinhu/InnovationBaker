@@ -30,12 +30,12 @@ android {
     buildTypes {
         debug {
             minifyEnabled true
-            proguardFile file("proguard.cfg")
+            proguardFile file("proguard-rules.txt")
         }
 
         release {
             minifyEnabled true
-            proguardFile file("proguard.cfg")
+            proguardFile file("proguard-rules.txt")
         }
     }
     dexOptions {
