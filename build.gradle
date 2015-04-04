@@ -45,11 +45,20 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_7
         targetCompatibility JavaVersion.VERSION_1_7
     }
+    packagingOptions {
+        exclude 'META-INF/ASL2.0'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'LICENSE.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+    }
 }
+
 
 dependencies {
     compile 'org.scala-lang:scala-library:2.11.5'
-    compile 'org.scaloid:scaloid_2.11:3.6.1-10+'
+    compile 'org.scaloid:scaloid_2.11:3.6.1-10'
     androidTestCompile 'org.scalatest:scalatest_2.11:2.2.4'
-    androidTestCompile 'org.scalamock:scalamock-scalatest-support_2.10:3.2.1'
+    androidTestCompile 'org.scalamock:scalamock-scalatest-support_2.11:3.2.1'
 }

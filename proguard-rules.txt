@@ -2,6 +2,8 @@
 -dontobfuscate
 -dontpreverify
 -dontwarn scala.**
+-dontwarn org.scalatest.**
+-dontwarn javax.swing.**
 -ignorewarnings
 
 # temporary workaround; see Scala issue SI-5397
