@@ -1,4 +1,4 @@
-package dev.chimera.innovation.android
+package dev.chimera.innovation.droid
 
 /**
  * Created by jin on 3/15/15.

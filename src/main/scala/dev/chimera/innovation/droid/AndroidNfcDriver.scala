@@ -1,41 +1,53 @@
-package dev.chimera.innovation
+package dev.chimera.innovation.droid
 
 import android.app.{Activity, Dialog, PendingIntent}
 import android.content.{Context, Intent, IntentFilter}
 import android.nfc.tech.{Ndef, NdefFormatable}
 import android.nfc.{NdefMessage, NfcAdapter, Tag}
-import android.util.Log
-
-import scala.collection.immutable.HashMap
+import dev.chimera.innovation.NfcDriver
 
 /**
  * Created by jin on 3/14/15.
  */
-class AndroidNfcDriver(aContext: Context, anActivity: Activity) extends NfcDriver {
-
+class AndroidNfcDriver() extends NfcDriver {
   final val MIME_TEXT_PLAIN: String = "text/plain"
-  var nfcAdapter = NfcAdapter.getDefaultAdapter(aContext)
+  //
+  var nfcAdapter: NfcAdapter = null
   var nfcPendingIntent = null
   var writeTagFilters = null
   var ndefExchangeFilters = null
   var writeMode: Boolean = false
   var caughtNDEFMessages: Array[Nothing] = null
-  var activityObject = anActivity
-  var howToUseDialog: Dialog = new Dialog(activityObject, android.R.style.Theme_NoTitleBar_Fullscreen)
+  var activity: Activity = null
+  var howToUseDialog: Dialog = null
 
-  override def retrieve(): Map[String, Object] = {
-    //    val data: Map[String, Object] = Map(
-    //      ("coffee",      100),
-    //      ("water",       100),
-    //      ("milk",        100),
-    //      ("sugar",       100),
-    //      ("temperature", 100))
-    //    return data
-    return HashMap()
+  def this(aContext: Context, anActivity: Activity) {
+    this()
+    nfcAdapter = NfcAdapter.getDefaultAdapter(aContext)
+    activity = anActivity
+  }
+
+  override def read(): Array[Byte] = {
+    //val tag = new Tag("MYTAG")
+    val ndef = Ndef.get(null)
+    if (ndef != null) {
+      ndef.connect
+      var message = ndef.getNdefMessage
+      ndef.close
+//
+//      return Map(
+//        "coffee" -> int2Integer(100),
+//        "water" -> int2Integer(100),
+//        "milk" -> int2Integer(100),
+//        "sugar" -> int2Integer(100),
+//        "temperature" -> int2Integer(100))
+    }
+    return null
   }
 
   def askForTag(disableOrNot: Boolean) {
     writeMode = !disableOrNot
+    howToUseDialog = new Dialog(activity, android.R.style.Theme_NoTitleBar_Fullscreen)
     //howToUseDialog.setContentView(R.layout.alert_dialog)
     howToUseDialog.setCancelable(true)
     howToUseDialog.show
@@ -45,7 +57,7 @@ class AndroidNfcDriver(aContext: Context, anActivity: Activity) extends NfcDrive
 
   def writeTag(message: NdefMessage, tag: Tag): Boolean = {
     val ndef: Ndef = Ndef.get(tag)
-    if (ndef != null || !ndef.isWritable || ndef.getMaxSize < message.getByteArrayLength) {
+    if (ndef == null || !ndef.isWritable || ndef.getMaxSize < message.getByteArrayLength) {
       return false
     }
     ndef.connect
@@ -59,7 +71,6 @@ class AndroidNfcDriver(aContext: Context, anActivity: Activity) extends NfcDrive
     if (format != null) {
       format.connect
       format.format(message)
-      Log.d(Constants.NFC_TAG, "Formatted tag and wrote message")
       return true
     }
     return false

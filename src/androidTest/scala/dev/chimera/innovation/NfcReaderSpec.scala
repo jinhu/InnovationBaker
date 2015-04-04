@@ -6,7 +6,7 @@ package dev.chimera.innovation
 class NfcReaderSpec extends UnitSpec {
 
 
-  var mNfcReader = new NfcNode()
+  var mNfcReader = new NfcNode(new DeviceSetting)
 
   var mCup = new CoffeeCup()
 
